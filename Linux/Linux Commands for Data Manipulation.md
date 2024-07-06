@@ -3,21 +3,21 @@
 # **Linux Commands for Data Manipilation** (unsorted)
 
 ## curl
-* **Basic file download**
+* **Basic file download:**
 	```
-	curl "https://...filename.csv"
+	curl "https://.../filename.csv"
 	```
-* **Download file, unzip it, import into sqlite, and write 'sqlite' query for the dataset**: 
+* **Download file, unzip it, import into sqlite, and write 'sqlite' query for the dataset:**
 	```
 	curl -s https://www.some-website.com/additional/interesting-file.zip | gunzip | sqlite3 -csv ':memory:' '.import /dev/stdin stdin' "select Name from stdin order by USD asc limit 1;"
 	```
 
-* **Download file, unzip it, import into sqlite, and use some python 'pandas' on the dataset**:
+* **Download file, unzip it, import into sqlite, and use some python 'pandas' on the dataset:**
 	```
 	curl -s https://www.some-website.com/additional/interesting-file.zip | gunzip | python3 -c 'import sys, pandas as pd pd.read_csv(sys.stdin).melt("Name").to_csv(sys.stdout, index=False)'
 	```
 
-* **Download file, unzip it, import into sqlite, use some python 'pandas' on the dataset, and upload it to a cloud csv storage**:
+* **Download file, unzip it, import into sqlite, use some python 'pandas' on the dataset, and upload it to a cloud csv storage:**
 	```
 	curl -s https://www.some-website.com/additional/interesting-file.zip | gunzip | python3 -c 'import sys, pandas as pd pd.read_csv(sys.stdin).iloc[:,:-1].melt("Name").to_csv(sys.stdout,index=False)' | curl -n --upload-file - 'https://csvbase.com/myname/secret-dump?public=yes'
 	```
@@ -25,14 +25,14 @@
 ***
 
 ## wget
-* **Basic file download**:
+* **Basic file download:**
 	```
-	wget "https://...filename.csv"
+	wget "https://.../filename.csv"
 	```
 
-* **Download 'large json file' into directory using some custom headers**:
+* **Download 'large json file' into directory using some custom headers:**
 	```
-	wget --secure-protocol=TLSv1_2 -c --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 --continue -O "myfolder/desired-filename.json" "https://...filename.json"
+	wget --secure-protocol=TLSv1_2 -c --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 --continue -O "myfolder/desired-filename.json" "https://.../filename.json"
 	```
 
 ***
@@ -64,7 +64,7 @@
 ## tail 
 * **This command displays the last 100 lines of a file:** 
 	```
-	tail  -n 100 largefile.txt
+	tail -n 100 largefile.txt
 	```
 
 ***
